@@ -1,0 +1,34 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>KeyPress Demo</h1>
+
+focus a component and press any key
+
+<h3>Generic Text Input</h3>
+<input type="text" @onkeydown=OnKeyDown />
+<h3>Generic Number Input</h3>
+<input type="number" @onkeydown=OnKeyDown />
+
+<h3>RadzenTextBox</h3>
+<Radzen.Blazor.RadzenTextBox @onkeydown=OnKeyDown />
+<h3>RadzenNumeric <span style="color:red">(onkeydown eventhandler does not work)</span></h3>
+<Radzen.Blazor.RadzenNumeric @bind-Value=_intValue @onkeydown=OnKeyDown />
+
+<h3>Events</h3>
+<ul>
+    @foreach (var e in events.Take(3))
+    {
+        <li>@e</li>
+    }
+</ul>
+
+@code {
+    private int _intValue;
+    private List<string> events = new();
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        events.Insert(0, e.Key);
+    }
+}
